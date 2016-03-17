@@ -51,7 +51,6 @@ initMap(); //initialize the map and it will show in browser, without this it wil
 
 
 
-
 //this makes the geolocation work
 function geocodeAddress(geocoder, resultsMap) {
   var address = document.getElementById('address').value;
@@ -65,6 +64,11 @@ function geocodeAddress(geocoder, resultsMap) {
         animation:google.maps.Animation.BOUNCE,
         icon: image
       });
+      var infowindow = new google.maps.InfoWindow({
+        content:"Wow, you found a spot on a map.. Good job or whatever.."
+      });
+
+      infowindow.open(map,marker);
       setTimeout(function(){ marker.setAnimation(null); }, 750);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
