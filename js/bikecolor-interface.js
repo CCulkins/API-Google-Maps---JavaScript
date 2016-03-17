@@ -43,14 +43,14 @@ $(document).ready(function() {
     geocodeAddress(geocoder, map); //on click it will reposition the map
   });
 
-  var beachMarker = new google.maps.Marker({
-    position: {lat: 40.674, lng: -73.946},
-    map: map,
-    icon: image
-  });
+  var service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, callback);
 }
 initMap(); //initialize the map and it will show in browser, without this it will not work
 });
+
+
+
 
 //this makes the geolocation work
 function geocodeAddress(geocoder, resultsMap) {
@@ -62,8 +62,10 @@ function geocodeAddress(geocoder, resultsMap) {
       var marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location,
+        animation:google.maps.Animation.BOUNCE,
         icon: image
       });
+      setTimeout(function(){ marker.setAnimation(null); }, 750);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
